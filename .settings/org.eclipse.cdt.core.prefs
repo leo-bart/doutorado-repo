@@ -1,0 +1,17 @@
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.toolchain.gnu.base.544030941.1800061554/LD_LIBRARY_PATH/delimiter=\:
+environment/project/cdt.managedbuild.toolchain.gnu.base.544030941.1800061554/LD_LIBRARY_PATH/operation=replace
+environment/project/cdt.managedbuild.toolchain.gnu.base.544030941.1800061554/LD_LIBRARY_PATH/value=/usr/lib/jvm/java-6-openjdk-amd64/jre/lib/amd64/server\:/usr/lib/jvm/java-6-openjdk-amd64/jre/lib/amd64\:/usr/lib/jvm/java-6-openjdk-amd64/jre/../lib/amd64\:/home/leonardo/Software/mbsim/lib
+environment/project/cdt.managedbuild.toolchain.gnu.base.544030941.1800061554/PWD/delimiter=\:
+environment/project/cdt.managedbuild.toolchain.gnu.base.544030941.1800061554/PWD/operation=replace
+environment/project/cdt.managedbuild.toolchain.gnu.base.544030941.1800061554/PWD/value=/home/leonardo/Projects/mbsim/2d-wagon
+environment/project/cdt.managedbuild.toolchain.gnu.base.544030941.1800061554/append=true
+environment/project/cdt.managedbuild.toolchain.gnu.base.544030941.1800061554/appendContributed=true
+environment/project/cdt.managedbuild.toolchain.gnu.base.56095724/LD_LIBRARY_PATH/delimiter=\:
+environment/project/cdt.managedbuild.toolchain.gnu.base.56095724/LD_LIBRARY_PATH/operation=append
+environment/project/cdt.managedbuild.toolchain.gnu.base.56095724/LD_LIBRARY_PATH/value=$LD_LIBRARY_PATH\:~/Software/mbsim/lib\:/usr/lib
+environment/project/cdt.managedbuild.toolchain.gnu.base.56095724/PKG_CONFIG_PATH/delimiter=\:
+environment/project/cdt.managedbuild.toolchain.gnu.base.56095724/PKG_CONFIG_PATH/operation=append
+environment/project/cdt.managedbuild.toolchain.gnu.base.56095724/PKG_CONFIG_PATH/value=/home/leonardo/Software/mbsim/lib/pkgconfig
+environment/project/cdt.managedbuild.toolchain.gnu.base.56095724/append=true
+environment/project/cdt.managedbuild.toolchain.gnu.base.56095724/appendContributed=true

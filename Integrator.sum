@@ -1,0 +1,11 @@
+Integration time:   6282.8
+Integration steps:  998074
+Evaluations MBS:    3280806   (max/Thread: 2187204)
+Steps with events: 199731
+Refused steps: 95528
+Refused steps with events: 71968
+Maximum step size: 0.000257693
+Minimum step size: 5.05204e-07
+Average step size: 2.00386e-05
+Maximum number of iterations: 128
+Average number of iterations: 0.804206

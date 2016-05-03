@@ -1,0 +1,27 @@
+***********************************************************
+*	2d-wagon-1.0		                          *
+*	Change wagon                                      *
+*                          		                  *
+* Created 2014.04.28                                      *
+* Leonardo Baruffaldi - Mechanical Engineering Faculty    *
+*                       UNICAMP                           *
+***********************************************************
+
+***********************************************************
+1. Purpose
+***********************************************************
+The present C++ code aims to simulate a freight railway wagon with and without
+connected masses that represent the soloshin frequencies of a liquid cargo.
+
+***********************************************************
+Changes
+***********************************************************
+
+** 2014.04.28
+Corrected fluid mass inertia. Added some comments and spaces to clear the code.
+
+Deleted the mmovingmass parameter that setted the amount of mass that could
+move. This parameter had no sense whatsoever because moving masses were a
+function of the sloshing frequencies.
+
+The previous parameter was changed by the fillRatio parameter.

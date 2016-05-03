@@ -1,0 +1,18 @@
+%======================== OVERALL CONTROLS ===================================%
+SIMULATION_TIME=20.0
+SYSTEM_NAME=Wagon0_1e-6tol_rel1e-5
+%======================== MOTION INPUT =======================================%
+AMPLITUDE=0.01
+ANGULAR_VELOCITY=3.975
+MOVEMENT_DELAY=2
+%======================== WAGON DATA =========================================%
+CAR_WHEEL_BASE=14.622
+TRUCK_WHEEL_BASE=1.84
+BOX_MASS=13344
+BOX_Ixx=52800.0
+BOX_Iyy=1284000.0
+BOX_Izz=25931.02
+FILL_RATIO=1.0
+WAGON_TYPE=0
+%===================== OTHER CONTROLS ========================================%
+FRICTION_COEFF=0.25

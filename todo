@@ -1,0 +1,11 @@
+Implementação do modelo de movimento de líquido
+
+0. Criar uma nova classe WagonSloshing baseada no Wagon
+1. Criar um int com o número de modos requisitados
+2. Criar um vector<MBSim::RigidBody*> para armazenar as massas móveis
+3. Criar um MBSim::RigidBody para armazenar a massa fixa de fluido
+4. Criar um float para armazenar a massa do fluido e um para armazenar o momento de inércia
+5. Redimensionar o vetor de corpos rígidos para o número de modos requisitados
+6. Instanciar os corpos rígidos
+7. Definir as propriedades baseado no modelo de Graham-Rodriguez
+8. Adicionar ao vagão

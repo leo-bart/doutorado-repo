@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Group name="Wagon0" xmlns="http://openmbv.berlios.de/OpenMBV" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <Frame name="I">
+        <initialTranslation>[0;0;0]</initialTranslation>
+        <initialRotation>[0;0;0]</initialRotation>
+        <scaleFactor>1</scaleFactor>
+        <size>1</size>
+        <offset>1</offset>
+    </Frame>
+    <Group name="Front truck">
+        <Group name="Wedge Left_Group" expand="false">
+            <Extrusion name="Wedge Left">
+                <staticColor>green</staticColor>
+                <initialTranslation>[-0.0478079;0.133333;-0.05]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <windingRule>&quot;odd&quot;</windingRule>
+                <height>0.1</height>
+                <contour>[ -0.000174551, -0.01, 0;    -0.00349101, -0.2, 0;    0.146915, -0.2, 0;    0.00734573, -0.01, 0 ]</contour>
+            </Extrusion>
+            <Frame name="C">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <size>1</size>
+                <offset>1</offset>
+            </Frame>
+        </Group>
+        <Group name="Wedge Right_Group" expand="false">
+            <Extrusion name="Wedge Right">
+                <staticColor>green</staticColor>
+                <initialTranslation>[0.0478079;0.133333;-0.05]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <windingRule>&quot;odd&quot;</windingRule>
+                <height>0.1</height>
+                <contour>[ -0.00734573, -0.01, 0;    -0.146915, -0.2, 0;    0.00349101, -0.2, 0;    0.000174551, -0.01, 0 ]</contour>
+            </Extrusion>
+            <Frame name="C">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <size>1</size>
+                <offset>1</offset>
+            </Frame>
+        </Group>
+        <Group name="Bolster_Group" expand="false">
+            <Extrusion name="Bolster">
+                <staticColor>color4</staticColor>
+                <initialTranslation>[0;0;-0.7875]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <windingRule>&quot;odd&quot;</windingRule>
+                <height>1.575</height>
+                <contour>[ -0.205, 0.095, 0;    0.205, 0.095, 0;    0.0654311, -0.095, 0;    -0.0654311, -0.095, 0 ]</contour>
+            </Extrusion>
+            <Frame name="WCP">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <size>1</size>
+                <offset>1</offset>
+            </Frame>
+            <Grid name="Contact plane left">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;1.5708;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <xSize>1</xSize>
+                <ySize>1</ySize>
+                <nx>10</nx>
+                <ny>10</ny>
+            </Grid>
+            <Grid name="Contact plane right">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;1.5708;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <xSize>1</xSize>
+                <ySize>1</ySize>
+                <nx>10</nx>
+                <ny>10</ny>
+            </Grid>
+        </Group>
+        <Group name="Side frame_Group" expand="false">
+            <Grid name="Side frame left">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;1.5708;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <xSize>1</xSize>
+                <ySize>1</ySize>
+                <nx>10</nx>
+                <ny>10</ny>
+            </Grid>
+            <Grid name="Side frame right">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;1.5708;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <xSize>1</xSize>
+                <ySize>1</ySize>
+                <nx>10</nx>
+                <ny>10</ny>
+            </Grid>
+            <Grid name="Ground">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;1.5708;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <xSize>1</xSize>
+                <ySize>1</ySize>
+                <nx>10</nx>
+                <ny>10</ny>
+            </Grid>
+        </Group>
+        <Group name="Wheel Left _Group" expand="false">
+            <CompoundRigidBody name="Wheel Left ">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <Rotation name="Roda 2">
+                    <initialTranslation>[0;0;0.7875]</initialTranslation>
+                    <initialRotation>[1.5708;0;0]</initialRotation>
+                    <scaleFactor>1</scaleFactor>
+                    <contour>[ 0.1, -0.067, 0;    0.4344, -0.067, 0;    0.4572, 0, 0;    0.4593, 0.043, 0;    0.4824, 0.043, 0;    0.4824, 0.077, 0;    0.1, 0.077, 0 ]</contour>
+                </Rotation>
+                <Rotation name="NOTSET">
+                    <initialTranslation>[0;0;-0.7875]</initialTranslation>
+                    <initialRotation>[4.71239;0;0]</initialRotation>
+                    <scaleFactor>1</scaleFactor>
+                    <contour>[ 0.1, -0.067, 0;    0.4344, -0.067, 0;    0.4572, 0, 0;    0.4593, 0.043, 0;    0.4824, 0.043, 0;    0.4824, 0.077, 0;    0.1, 0.077, 0 ]</contour>
+                </Rotation>
+            </CompoundRigidBody>
+        </Group>
+        <Group name="Wheel Right_Group" expand="false">
+            <CompoundRigidBody name="Wheel Right">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <Rotation name="Roda 2">
+                    <initialTranslation>[0;0;0.7875]</initialTranslation>
+                    <initialRotation>[1.5708;0;0]</initialRotation>
+                    <scaleFactor>1</scaleFactor>
+                    <contour>[ 0.1, -0.067, 0;    0.4344, -0.067, 0;    0.4572, 0, 0;    0.4593, 0.043, 0;    0.4824, 0.043, 0;    0.4824, 0.077, 0;    0.1, 0.077, 0 ]</contour>
+                </Rotation>
+                <Rotation name="NOTSET">
+                    <initialTranslation>[0;0;-0.7875]</initialTranslation>
+                    <initialRotation>[4.71239;0;0]</initialRotation>
+                    <scaleFactor>1</scaleFactor>
+                    <contour>[ 0.1, -0.067, 0;    0.4344, -0.067, 0;    0.4572, 0, 0;    0.4593, 0.043, 0;    0.4824, 0.043, 0;    0.4824, 0.077, 0;    0.1, 0.077, 0 ]</contour>
+                </Rotation>
+            </CompoundRigidBody>
+        </Group>
+        <Group name="CY1_ArrowGroup" expand="false" />
+        <Group name="CY2_ArrowGroup" expand="false" />
+        <CoilSpring name="S1">
+            <type>&quot;tube&quot;</type>
+            <numberOfCoils>5</numberOfCoils>
+            <springRadius>0.01</springRadius>
+            <crossSectionRadius>0.005</crossSectionRadius>
+            <nominalLength>-1</nominalLength>
+            <scaleFactor>1</scaleFactor>
+        </CoilSpring>
+        <Group name="S1_ArrowGroup" expand="false" />
+        <CoilSpring name="S2">
+            <type>&quot;tube&quot;</type>
+            <numberOfCoils>5</numberOfCoils>
+            <springRadius>0.01</springRadius>
+            <crossSectionRadius>0.005</crossSectionRadius>
+            <nominalLength>-1</nominalLength>
+            <scaleFactor>1</scaleFactor>
+        </CoilSpring>
+        <Group name="S2_ArrowGroup" expand="false" />
+        <CoilSpring name="Spring bolster">
+            <type>&quot;tube&quot;</type>
+            <numberOfCoils>5</numberOfCoils>
+            <springRadius>0.01</springRadius>
+            <crossSectionRadius>0.005</crossSectionRadius>
+            <nominalLength>-1</nominalLength>
+            <scaleFactor>1</scaleFactor>
+        </CoilSpring>
+        <Group name="Spring bolster_ArrowGroup" expand="false" />
+        <Group name="RSPRING: bolster_ArrowGroup" expand="false" />
+        <Group name="WedgeSideframe_Left-1_ArrowGroup" expand="false" />
+        <Group name="WedgeSideframe_Left-2_ArrowGroup" expand="false" />
+        <Group name="WedgeSideframe_Left-3_ArrowGroup" expand="false" />
+        <Group name="WedgeSideframe_Left-4_ArrowGroup" expand="false" />
+        <Group name="WedgeBolster_Left-1_ArrowGroup" expand="false" />
+        <Group name="WedgeBolster_Left-2_ArrowGroup" expand="false" />
+        <Group name="WedgeBolster_Left-3_ArrowGroup" expand="false" />
+        <Group name="WedgeBolster_Left-4_ArrowGroup" expand="false" />
+        <Group name="WedgeBolster_Right-1_ArrowGroup" expand="false" />
+        <Group name="WedgeBolster_Right-2_ArrowGroup" expand="false" />
+        <Group name="WedgeBolster_Right-3_ArrowGroup" expand="false" />
+        <Group name="WedgeBolster_Right-4_ArrowGroup" expand="false" />
+        <Group name="WedgeSideframe_Right-1_ArrowGroup" expand="false" />
+        <Group name="WedgeSideframe_Right-2_ArrowGroup" expand="false" />
+        <Group name="WedgeSideframe_Right-3_ArrowGroup" expand="false" />
+        <Group name="WedgeSideframe_Right-4_ArrowGroup" expand="false" />
+    </Group>
+    <Group name="Rear truck">
+        <Group name="Wedge Left_Group" expand="false">
+            <Extrusion name="Wedge Left">
+                <staticColor>green</staticColor>
+                <initialTranslation>[-0.0478079;0.133333;-0.05]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <windingRule>&quot;odd&quot;</windingRule>
+                <height>0.1</height>
+                <contour>[ -0.000174551, -0.01, 0;    -0.00349101, -0.2, 0;    0.146915, -0.2, 0;    0.00734573, -0.01, 0 ]</contour>
+            </Extrusion>
+            <Frame name="C">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <size>1</size>
+                <offset>1</offset>
+            </Frame>
+        </Group>
+        <Group name="Wedge Right_Group" expand="false">
+            <Extrusion name="Wedge Right">
+                <staticColor>green</staticColor>
+                <initialTranslation>[0.0478079;0.133333;-0.05]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <windingRule>&quot;odd&quot;</windingRule>
+                <height>0.1</height>
+                <contour>[ -0.00734573, -0.01, 0;    -0.146915, -0.2, 0;    0.00349101, -0.2, 0;    0.000174551, -0.01, 0 ]</contour>
+            </Extrusion>
+            <Frame name="C">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <size>1</size>
+                <offset>1</offset>
+            </Frame>
+        </Group>
+        <Group name="Bolster_Group" expand="false">
+            <Extrusion name="Bolster">
+                <staticColor>color4</staticColor>
+                <initialTranslation>[0;0;-0.7875]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <windingRule>&quot;odd&quot;</windingRule>
+                <height>1.575</height>
+                <contour>[ -0.205, 0.095, 0;    0.205, 0.095, 0;    0.0654311, -0.095, 0;    -0.0654311, -0.095, 0 ]</contour>
+            </Extrusion>
+            <Grid name="Contact plane left">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;1.5708;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <xSize>1</xSize>
+                <ySize>1</ySize>
+                <nx>10</nx>
+                <ny>10</ny>
+            </Grid>
+            <Grid name="Contact plane right">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;1.5708;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <xSize>1</xSize>
+                <ySize>1</ySize>
+                <nx>10</nx>
+                <ny>10</ny>
+            </Grid>
+        </Group>
+        <Group name="Side frame_Group" expand="false">
+            <Grid name="Side frame left">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;1.5708;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <xSize>1</xSize>
+                <ySize>1</ySize>
+                <nx>10</nx>
+                <ny>10</ny>
+            </Grid>
+            <Grid name="Side frame right">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;1.5708;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <xSize>1</xSize>
+                <ySize>1</ySize>
+                <nx>10</nx>
+                <ny>10</ny>
+            </Grid>
+            <Grid name="Ground">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;1.5708;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <xSize>1</xSize>
+                <ySize>1</ySize>
+                <nx>10</nx>
+                <ny>10</ny>
+            </Grid>
+        </Group>
+        <Group name="Wheel Left _Group" expand="false">
+            <CompoundRigidBody name="Wheel Left ">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <Rotation name="Roda 2">
+                    <initialTranslation>[0;0;0.7875]</initialTranslation>
+                    <initialRotation>[1.5708;0;0]</initialRotation>
+                    <scaleFactor>1</scaleFactor>
+                    <contour>[ 0.1, -0.067, 0;    0.4344, -0.067, 0;    0.4572, 0, 0;    0.4593, 0.043, 0;    0.4824, 0.043, 0;    0.4824, 0.077, 0;    0.1, 0.077, 0 ]</contour>
+                </Rotation>
+                <Rotation name="NOTSET">
+                    <initialTranslation>[0;0;-0.7875]</initialTranslation>
+                    <initialRotation>[4.71239;0;0]</initialRotation>
+                    <scaleFactor>1</scaleFactor>
+                    <contour>[ 0.1, -0.067, 0;    0.4344, -0.067, 0;    0.4572, 0, 0;    0.4593, 0.043, 0;    0.4824, 0.043, 0;    0.4824, 0.077, 0;    0.1, 0.077, 0 ]</contour>
+                </Rotation>
+            </CompoundRigidBody>
+        </Group>
+        <Group name="Wheel Right_Group" expand="false">
+            <CompoundRigidBody name="Wheel Right">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <Rotation name="Roda 2">
+                    <initialTranslation>[0;0;0.7875]</initialTranslation>
+                    <initialRotation>[1.5708;0;0]</initialRotation>
+                    <scaleFactor>1</scaleFactor>
+                    <contour>[ 0.1, -0.067, 0;    0.4344, -0.067, 0;    0.4572, 0, 0;    0.4593, 0.043, 0;    0.4824, 0.043, 0;    0.4824, 0.077, 0;    0.1, 0.077, 0 ]</contour>
+                </Rotation>
+                <Rotation name="NOTSET">
+                    <initialTranslation>[0;0;-0.7875]</initialTranslation>
+                    <initialRotation>[4.71239;0;0]</initialRotation>
+                    <scaleFactor>1</scaleFactor>
+                    <contour>[ 0.1, -0.067, 0;    0.4344, -0.067, 0;    0.4572, 0, 0;    0.4593, 0.043, 0;    0.4824, 0.043, 0;    0.4824, 0.077, 0;    0.1, 0.077, 0 ]</contour>
+                </Rotation>
+            </CompoundRigidBody>
+        </Group>
+        <Group name="CY1_ArrowGroup" expand="false" />
+        <Group name="CY2_ArrowGroup" expand="false" />
+        <CoilSpring name="S1">
+            <type>&quot;tube&quot;</type>
+            <numberOfCoils>5</numberOfCoils>
+            <springRadius>0.01</springRadius>
+            <crossSectionRadius>0.005</crossSectionRadius>
+            <nominalLength>-1</nominalLength>
+            <scaleFactor>1</scaleFactor>
+        </CoilSpring>
+        <Group name="S1_ArrowGroup" expand="false" />
+        <CoilSpring name="S2">
+            <type>&quot;tube&quot;</type>
+            <numberOfCoils>5</numberOfCoils>
+            <springRadius>0.01</springRadius>
+            <crossSectionRadius>0.005</crossSectionRadius>
+            <nominalLength>-1</nominalLength>
+            <scaleFactor>1</scaleFactor>
+        </CoilSpring>
+        <Group name="S2_ArrowGroup" expand="false" />
+        <CoilSpring name="Spring bolster">
+            <type>&quot;tube&quot;</type>
+            <numberOfCoils>5</numberOfCoils>
+            <springRadius>0.01</springRadius>
+            <crossSectionRadius>0.005</crossSectionRadius>
+            <nominalLength>-1</nominalLength>
+            <scaleFactor>1</scaleFactor>
+        </CoilSpring>
+        <Group name="Spring bolster_ArrowGroup" expand="false" />
+        <Group name="RSPRING: bolster_ArrowGroup" expand="false" />
+        <Group name="WedgeSideframe_Left-1_ArrowGroup" expand="false" />
+        <Group name="WedgeSideframe_Left-2_ArrowGroup" expand="false" />
+        <Group name="WedgeSideframe_Left-3_ArrowGroup" expand="false" />
+        <Group name="WedgeSideframe_Left-4_ArrowGroup" expand="false" />
+        <Group name="WedgeBolster_Left-1_ArrowGroup" expand="false" />
+        <Group name="WedgeBolster_Left-2_ArrowGroup" expand="false" />
+        <Group name="WedgeBolster_Left-3_ArrowGroup" expand="false" />
+        <Group name="WedgeBolster_Left-4_ArrowGroup" expand="false" />
+        <Group name="WedgeBolster_Right-1_ArrowGroup" expand="false" />
+        <Group name="WedgeBolster_Right-2_ArrowGroup" expand="false" />
+        <Group name="WedgeBolster_Right-3_ArrowGroup" expand="false" />
+        <Group name="WedgeBolster_Right-4_ArrowGroup" expand="false" />
+        <Group name="WedgeSideframe_Right-1_ArrowGroup" expand="false" />
+        <Group name="WedgeSideframe_Right-2_ArrowGroup" expand="false" />
+        <Group name="WedgeSideframe_Right-3_ArrowGroup" expand="false" />
+        <Group name="WedgeSideframe_Right-4_ArrowGroup" expand="false" />
+    </Group>
+    <Group name="Wagon">
+        <Group name="Wagon box_Group" expand="false">
+            <Cuboid name="Wagon box">
+                <staticColor>yellow</staticColor>
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <length>[16.6;2.47;2.47]</length>
+            </Cuboid>
+            <Frame name="C">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <size>1</size>
+                <offset>1</offset>
+            </Frame>
+            <Frame name="GF">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <size>1</size>
+                <offset>1</offset>
+            </Frame>
+            <Frame name="FBC">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <size>1</size>
+                <offset>1</offset>
+            </Frame>
+            <Frame name="RBC">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <size>1</size>
+                <offset>1</offset>
+            </Frame>
+        </Group>
+        <Group name="Sloshing mass 0_Group" expand="false">
+            <Frame name="C">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <size>1</size>
+                <offset>1</offset>
+            </Frame>
+        </Group>
+        <Group name="Sloshing mass 1_Group" expand="false">
+            <Frame name="C">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <size>1</size>
+                <offset>1</offset>
+            </Frame>
+        </Group>
+        <Group name="Solidified fluid_Group" expand="false">
+            <Frame name="C">
+                <initialTranslation>[0;0;0]</initialTranslation>
+                <initialRotation>[0;0;0]</initialRotation>
+                <scaleFactor>1</scaleFactor>
+                <size>1</size>
+                <offset>1</offset>
+            </Frame>
+        </Group>
+        <CoilSpring name="Spring: sloshing 0">
+            <type>&quot;tube&quot;</type>
+            <numberOfCoils>5</numberOfCoils>
+            <springRadius>0.01</springRadius>
+            <crossSectionRadius>0.005</crossSectionRadius>
+            <nominalLength>-1</nominalLength>
+            <scaleFactor>1</scaleFactor>
+        </CoilSpring>
+        <Group name="Spring: sloshing 0_ArrowGroup" expand="false" />
+        <Group name="Joint: translation: 0_ArrowGroup" expand="false" />
+        <CoilSpring name="Spring: sloshing 1">
+            <type>&quot;tube&quot;</type>
+            <numberOfCoils>5</numberOfCoils>
+            <springRadius>0.01</springRadius>
+            <crossSectionRadius>0.005</crossSectionRadius>
+            <nominalLength>-1</nominalLength>
+            <scaleFactor>1</scaleFactor>
+        </CoilSpring>
+        <Group name="Spring: sloshing 1_ArrowGroup" expand="false" />
+        <Group name="Joint: translation: 1_ArrowGroup" expand="false" />
+        <Group name="Joint: rigid_ArrowGroup" expand="false" />
+    </Group>
+    <Group name="Bushing: front plate_ArrowGroup" expand="false" />
+    <Group name="Joint: Front plate_ArrowGroup" expand="false" />
+    <Group name="Bushing: rear plate_ArrowGroup" expand="false" />
+    <Group name="Joint: Rear plate_ArrowGroup" expand="false" />
+</Group>

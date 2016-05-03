@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<parameter xmlns="http://openmbv.berlios.de/MBXMLUtils/parameter" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <scalarParameter name="color4">1</scalarParameter>
+    <scalarParameter name="green">0.5</scalarParameter>
+    <scalarParameter name="yellow">0.7</scalarParameter>
+</parameter>
