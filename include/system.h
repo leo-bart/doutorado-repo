@@ -52,7 +52,8 @@ using namespace std;
 #include <string>
 
 #include "mbsim/dynamic_system_solver.h"
-#include "babertruck.h"
+//#include "babertruck.h"
+#include "ridecontroltruck.h"
 #include "wagonbox.h"
 #include "wagonmovmass.h"
 #include "wagonsimple.h"
@@ -86,6 +87,7 @@ private:
   double truckWheelBase; // truck wheel base [m]
   double wagonMass; // wagon box mass [kg]
   double fillRatio; // amount of fluid in the box for the case of liquid cargo [0-1]
+  double frictionCoefficient; // friction coefficient between friction wedges and mating parts
   fmatvec::SymMat wagonInertiaTensor; // [kg.m^2]
   
   /// \brief Get input data from text file

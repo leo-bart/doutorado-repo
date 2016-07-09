@@ -23,13 +23,18 @@
 Bolster::Bolster(const std::string& name) : RigidBody(name), angle1Radians(0.0), height(1.0), width(1.0), length(1.0)
 { 
   // Geometry reference frame initialization
-  geometryReferenceFrame = new MBSim::FixedRelativeFrame("GR",fmatvec::Vec(3,fmatvec::INIT,0.0),fmatvec::SqrMat(3,fmatvec::EYE),this->getFrameC());
+  geometryReferenceFrame = new MBSim::FixedRelativeFrame("GR",
+      fmatvec::Vec(3,fmatvec::INIT,0.0),fmatvec::SqrMat(3,fmatvec::EYE),
+      this->getFrameC());
   this->addFrame(geometryReferenceFrame);
   
   // Wagon connection point frame initialization
   wagonConnectionPointPosition.resize(3);
   wagonConnectionPointPosition.init(0.0);
-  wagonConnectionFrame = new MBSim::FixedRelativeFrame("WCP",wagonConnectionPointPosition,fmatvec::SqrMat(3,fmatvec::EYE),this->getFrame("GR"));
+  wagonConnectionFrame = new MBSim::FixedRelativeFrame("WCP",
+      wagonConnectionPointPosition,
+      fmatvec::SqrMat(3,fmatvec::EYE),
+      this->getFrame("GR"));
   this->addFrame(wagonConnectionFrame);
   
   // Initialize contact planes
@@ -116,10 +121,11 @@ void Bolster::setContactPlanes()
   fmatvec::Vec rotationVector(1,fmatvec::INIT,angle1Radians - M_PI); // rotation magnitude
   fmatvec::Vec planePosition(3,fmatvec::INIT,0.0); // reference position for the plane
   planePosition(0) = -width / 2 + ( height / 2 ) * tan(angle1Radians);
-  planePosition(1) = 0;
-  planePosition(2) = length / 2;
+  planePosition(1) = 0.0;
+  planePosition(2) = 0.0;
   
-  this->addContour(leftWedgePlane, planePosition, rotationZ(rotationVector,0.0,NULL),geometryReferenceFrame);
+  this->addContour(leftWedgePlane, planePosition,
+		  rotationZ(rotationVector,0.0,NULL),geometryReferenceFrame);
   
   //settings for the right wedge plane
   planePosition(0) = -planePosition(0);
