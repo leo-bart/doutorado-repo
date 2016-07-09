@@ -21,7 +21,7 @@
 
 // next variables control the type of simulation
 #define ALTERNATED_MOTION
-#define MOVING_MASS
+//#define MOVING_MASS
 
 System::System(const string& projectName, const string& inputFileName) :
     DynamicSystemSolver(projectName)
@@ -43,13 +43,19 @@ System::System(const string& projectName, const string& inputFileName) :
   /// ----------------- TRUCKS ------------------------------------------------
   Vec3 position(3, INIT, 0.0);
   position(0) = -truckBaseDistance / 2;
-  BarberTruck* frontTruck = new BarberTruck("Front truck");
+  /*BarberTruck* frontTruck = new BarberTruck("Front truck");*/
+  RideControlTruck* frontTruck = new RideControlTruck("Front truck",
+      frictionCoefficient,
+      truckWheelBase);
   frontTruck->setPosition(position);
   this->addGroup(frontTruck);
 
   frontTruck->bolster->getFrame("WCP")->enableOpenMBV();
 
-  BarberTruck* rearTruck = new BarberTruck("Rear truck");
+  RideControlTruck* rearTruck = new RideControlTruck("Rear truck",
+      frictionCoefficient,
+      truckWheelBase);
+  //BarberTruck* rearTruck = new BarberTruck("Rear truck");
   position(0) = truckBaseDistance / 2;
   rearTruck->setPosition(position);
   this->addGroup(rearTruck);
@@ -70,7 +76,7 @@ System::System(const string& projectName, const string& inputFileName) :
 
   // inertia reference frame
   position(0) = 0.0;
-  position(1) = 1.36686;
+  position(1) = 2.152;
   wagon->setPosition(position);
   this->addGroup(wagon);
   wagon->getWagonBox()->setFrameForKinematics(
@@ -85,10 +91,12 @@ System::System(const string& projectName, const string& inputFileName) :
   wagon->setRearBolsterConnectionPosition(truckBaseDistance / 2, -1.2, 0.);
 
   // configure geometric representation
-  wagon->setHeight(2.47);
-  wagon->setWidth(2.47);
-  wagon->setLength(16.60);
+  wagon->setHeight(1.908);
+  wagon->setWidth(3.113);
+  wagon->setLength(8.747);
+#ifdef MOVING_MASS
   wagon->Initialize();
+#endif
   wagon->enableOpenMBV(true);
 
   /// ---------------- JOINTS BETWEEN BOLSTERS AND BOX -----------------------
@@ -131,15 +139,14 @@ System::System(const string& projectName, const string& inputFileName) :
 
 #ifdef ALTERNATED_MOTION
   double forwardVelocity = 40 / 3.6; // km/h * 3.6 = m/s
-  double wheelBase = frontTruck->getWheelBase(); // wheel base from the trucks
 
   wheel1 = new SinusoidalMovement(angSpeed, amplitude, t0);
   wheel2 = new SinusoidalMovement(angSpeed, amplitude,
-      t0 + wheelBase / forwardVelocity);
+      t0 + truckWheelBase / forwardVelocity);
   wheel3 = new SinusoidalMovement(angSpeed, amplitude,
-      t0 + (truckBaseDistance - wheelBase) / forwardVelocity);
+      t0 + (truckBaseDistance - truckWheelBase) / forwardVelocity);
   wheel4 = new SinusoidalMovement(angSpeed, amplitude,
-      t0 + (truckBaseDistance + wheelBase) / forwardVelocity);
+      t0 + (truckBaseDistance + truckWheelBase) / forwardVelocity);
 #else
   wheel1 = new SinusoidalMovement(angSpeed, amplitude,t0);
   wheel2 = new SinusoidalMovement(angSpeed, amplitude,t0);
@@ -171,14 +178,19 @@ System::System(const string& projectName, const string& inputFileName) :
       new SinusoidalMovement::Velocity(*wheel4));
   rearTruck->wheelR->setDerivativeOfGuidingVelocityOfTranslation(
       new SinusoidalMovement::Acceleration(*wheel4));
-//   frontTruck->wheelL->getFrame("C")->enableOpenMBV();
-//   frontTruck->wheelR->getFrame("C")->enableOpenMBV();
-//   rearTruck->wheelL->getFrame("C")->enableOpenMBV();
-//   rearTruck->wheelR->getFrame("C")->enableOpenMBV();
+
+  /// ------------- INITIAL CONDITIONS --------------------------------
+  Vec3 wagonOffset(INIT,0.0);
+  wagonOffset ( 1 ) = 0.060;
+
+  wagon->getWagonBox()->setInitialGeneralizedPosition(wagonOffset);
+  // next, only the bolster positions have to be set because wedges are
+  // place relative to it
+  frontTruck->bolster->setInitialGeneralizedPosition(wagonOffset);
+  rearTruck->bolster->setInitialGeneralizedPosition(wagonOffset);
 }
 
-int
-System::initializeFromFile(const string& inputFileName)
+int System::initializeFromFile(const string& inputFileName)
 {
   amplitude = atof(searchParameter(inputFileName, "AMPLITUDE").c_str());
 
@@ -207,6 +219,9 @@ System::initializeFromFile(const string& inputFileName)
       searchParameter(inputFileName, "BOX_Iyy").c_str());
   wagonInertiaTensor(2, 2) = atof(
       searchParameter(inputFileName, "BOX_Izz").c_str());
+
+  frictionCoefficient = atof(
+      searchParameter(inputFileName, "FRICTION_COEFF").c_str());
 
   //wagonType = atof(searchParameter(inputFileName, "WAGON_TYPE").c_str());
 

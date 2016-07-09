@@ -9,6 +9,11 @@
 #define TRUCK_H
 
 #include <mbsim/group.h>
+#include <mbsim/spring_damper.h>
+
+#ifdef HAVE_OPENMBVCPPINTERFACE
+#include "openmbvcppinterface/coilspring.h"
+#endif
 
 class Truck : public MBSim::Group
 {
@@ -28,6 +33,8 @@ protected:
    * @param typeOfTruck_ string with the name of the type
    */
   void setModelType (const std::string& typeOfTruck_){ typeOfTruck = typeOfTruck_;};
+  void springOpenMBVgraphics(MBSim::SpringDamper *spring, int numOfCoils,
+      double wireRadius, double spiralRadius);
 };
 
 #endif /* TRUCK_H */

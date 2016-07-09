@@ -36,7 +36,8 @@ int main(int argc, char** argv)
  double endTime = atof(searchParameter(inputFileName,"SIMULATION_TIME").c_str());
 
  // build single modules
- DynamicSystemSolver *sys = new System(searchParameter(inputFileName,"SYSTEM_NAME"),inputFileName);
+ DynamicSystemSolver *sys = new System(searchParameter(inputFileName,"SYSTEM_NAME"),
+     inputFileName);
  
  // add modules to overall dynamical system
  sys->setConstraintSolver(GaussSeidel);
@@ -50,13 +51,14 @@ int main(int argc, char** argv)
  sys->setLaTol(2e-2);
  sys->setgddTol(2e-5);
  
- TimeSteppingSSCIntegrator integrator;
- //integrator.setStepSize(5e-6);
- integrator.setAbsoluteTolerance(1e-8);
- integrator.setRelativeTolerance(1e-5);
+ // TimeSteppingSSCIntegrator integrator;
+ TimeSteppingIntegrator integrator;
+ integrator.setStepSize(0.5e-5);
+ //integrator.setAbsoluteTolerance(1e-8);
+ //integrator.setRelativeTolerance(1e-5);
  integrator.setEndTime(endTime);
  integrator.setPlotStepSize(1e-3);
- integrator.setGapControl(1);
+ //integrator.setGapControl(1);
  integrator.integrate(*sys);
  cout << "finished" << endl;
  
