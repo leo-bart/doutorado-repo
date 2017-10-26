@@ -23,20 +23,18 @@
 #ifndef WEDGE_H
 #define WEDGE_H
 
-#include "mbsim/rigid_body.h"
-#include "mbsim/frame.h"
-#include "mbsim/contact.h"
-#include "mbsim/constitutive_laws.h"
-#include "mbsim/contour.h"
+#include "mbsim/objects/rigid_body.h"
+#include "mbsim/frames/frame.h"
+#include "mbsim/frames/fixed_relative_frame.h"
+#include "mbsim/contours/contour.h"
 #include "mbsim/contours/point.h"
 #include "mbsim/contours/compound_contour.h"
 #include "fmatvec/vector.h"
 #include "fmatvec/matrix.h"
 #include <math.h>
 
-#ifdef HAVE_OPENMBVCPPINTERFACE
+
 #include "openmbvcppinterface/extrusion.h"
-#endif
 
 class Wedge : public MBSim::RigidBody
 {
@@ -61,27 +59,9 @@ public:
   /// Fills point table matrix and the compound contour
   void buildContour(void);
   
-  /// General interface to define contacts. What determines whether it is the bolster
-  /// or the sideframe is the idx members
-  std::vector<MBSim::Contact*>* contactGeneral(MBSim::Contour* contactContour,
-      double frictionCoeficcient,
-      double restitutionCoefficient,
-      std::vector<int> idx,
-      std::string contactName);
-  /// Defines contacts between wedge and sideframe or wedge and bolster
-  std::vector<MBSim::Contact*>* contactLeft(MBSim::Contour* sfContactContour,
-      double frictionCoefficient,
-      double restitutionCoefficient,
-      std::string contactName);
-  std::vector<MBSim::Contact*>* contactRight(MBSim::Contour* boContactContour,
-        double frictionCoefficient,
-        double restitutionCoefficient,
-        std::string contactName);
-
-#ifdef HAVE_OPENMBVCPPINTERFACE
   /// \param enable Boolean to activate OpenMBV
   void enableOpenMBV(bool enable);
-#endif
+
 private:
   double height; /// vertical height of the wedge
   double depth; /// depth for extrusion

@@ -21,14 +21,13 @@
 #ifndef WAGONBOX_H
 #define WAGONBOX_H
 
-#include <mbsim/rigid_body.h>
+#include <mbsim/objects/rigid_body.h>
 
 #include "fmatvec/fmatvec.h"
-#include "mbsim/frame.h"
+#include "mbsim/frames/frame.h"
+#include "mbsim/frames/fixed_relative_frame.h"
 
-#ifdef HAVE_OPENMBVCPPINTERFACE
 #include "openmbvcppinterface/cuboid.h"
-#endif
 
 
 class WagonBox : public MBSim::RigidBody
@@ -66,9 +65,7 @@ public:
   
   /// \brief activates OpenMBV representation
   /// \param enable Boolean flag
-#ifdef HAVE_OPENMBVCPPINTERFACE
   void enableOpenMBV(bool enable);
-#endif
   
   void setLength(double l_){ length = l_; }
   void setWidth(double w_){ width = w_; }

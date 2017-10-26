@@ -9,7 +9,7 @@
 #define WHEEL_H
 
 #include <string.h>
-#include <mbsim/rigid_body.h>
+#include <mbsim/objects/rigid_body.h>
 
 #include <openmbvcppinterface/rotation.h>
 

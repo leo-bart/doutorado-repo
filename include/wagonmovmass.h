@@ -22,9 +22,10 @@
 
 #include "wagonbox.h"
 #include "wagonsimple.h"
-#include <mbsim/spring_damper.h>
-#include <mbsim/joint.h>
-#include <mbsim/constitutive_laws.h>
+#include "mbsim/links/spring_damper.h"
+#include "mbsim/links/joint.h"
+#include "mbsim/constitutive_laws/constitutive_laws.h"
+#include "mbsim/functions/kinetics/linear_spring_damper_force.h"
 
 #ifdef HAVE_OPENMBVCPPINTERFACE
 #include <openmbvcppinterface/coilspring.h>

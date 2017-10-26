@@ -23,9 +23,9 @@
 #define SINUSOIDALMOVEMENT_H
 
 #include "fmatvec/fmatvec.h"
-#include "mbsim/kinematics.h"
+#include "mbsim/functions/kinematics/kinematics.h"
 
-class SinusoidalMovement
+class SinusoidalMovement : MBSim::Function<fmatvec::Vec3(double)>
 {
 
 public:
@@ -40,86 +40,110 @@ public:
   SinusoidalMovement ( double _om, double _amp, double _tDelay );
   virtual ~SinusoidalMovement();
 
-  /// \brief Nested class to inform position
-  class Position : public MBSim::Translation
-  {
-  private:
-    double amp;
-    double om;
-    double t0;
-  public:
-    /// \brief Constructor with inherited enclosing class
-    explicit Position (const SinusoidalMovement& enc) : 
-      amp(enc.amplitude), om(enc.angularSpeed), t0(enc.timeDelay) {};
-    
-    /// \brief Number of dofs
-    int getqSize() const
-    {
-      return 0;
+  int getArgSize() const {return 0;}
+    fmatvec::Vec3 operator()(const double &t) {
+      fmatvec::Vec3 r;
+      r(0) = cos(angularSpeed*t);
+      r(1) = sin(angularSpeed*t);
+      return r;
+    }; 
+    fmatvec::Vec3 parDer(const double &t) {
+      fmatvec::Vec3 jh;
+      jh(0) = -sin(angularSpeed*t)*angularSpeed;
+      jh(1) =  cos(angularSpeed*t)*angularSpeed;
+      return jh;
+    }
+    fmatvec::Vec3 parDerParDer(const double &t) {
+      fmatvec::Vec3 jb;
+      jb(0) = -cos(angularSpeed*t)*angularSpeed*angularSpeed;
+      jb(1) =  -sin(angularSpeed*t)*angularSpeed*angularSpeed;
+      return jb;
     }
 
-    /// \brief Overloaded () operator
-    virtual fmatvec::Vec3 operator() ( const fmatvec::Vec &q, const double &t, const void * =NULL )
-    {
-      fmatvec::Vec3 PrPK;
-      PrPK ( 0 ) = 0.;
-      if ( t>t0 )
-        {
-          PrPK ( 1 ) = -amp*sin ( om* ( t-t0 ) );
-        }
-      return PrPK;
-    };
-  };
+  
 
-  /// \brief Nested class to inform velocity
-  class Velocity : public MBSim::Function1<fmatvec::Vec3, double>
-  {
-  private:
-    double amp;
-    double om;
-    double t0;
-  public:
-    /// \brief Constructor with inherited enclosing class
-    explicit Velocity (const SinusoidalMovement& enc) :
-      amp(enc.amplitude), om(enc.angularSpeed), t0(enc.timeDelay) {};
-    
-    /// \brief Overloaded () operator
-    fmatvec::Vec3 operator() ( const double& t, const void* )
-    {
-      fmatvec::Vec3 j;
-      j ( 0 ) = 0.;
-      if ( t>t0 )
-        {
-          j ( 1 ) = -amp*cos ( om* ( t-t0 ) ) * om;
-        }
-      return j;
-    }
-  };
 
-  /// \brief Nested class to inform acceleration
-  class Acceleration : public MBSim::Function1<fmatvec::Vec3, double>
-  {
-  private:
-    double amp;
-    double om;
-    double t0;
-  public:
-    /// \brief Contructor inherited from enclosing class
-    explicit Acceleration(const SinusoidalMovement& enc) 
-      : amp(enc.amplitude), om(enc.angularSpeed), t0(enc.timeDelay) {};
-    
-    /// \brief Overloaded () operator
-    fmatvec::Vec3 operator() ( const double& t, const void* )
-    {
-      fmatvec::Vec3 dj;
-      dj ( 0 ) = 0.;
-      if ( t>t0 )
-        {
-          dj ( 1 ) = amp*sin ( om* ( t-t0 ) ) * om * om;
-        }
-      return dj;
-    }
-  };
+
+//  /// \brief Nested class to inform position
+//  class Position : public MBSim::LinearTranslation<double>
+//  {
+//  private:
+//    double amp;
+//    double om;
+//    double t0;
+//  public:
+//    /// \brief Constructor with inherited enclosing class
+//    explicit Position (const SinusoidalMovement& enc) : 
+//      amp(enc.amplitude), om(enc.angularSpeed), t0(enc.timeDelay) {};
+//    
+//    /// \brief Number of dofs
+//    int getqSize() const
+//    {
+//      return 0;
+//    }
+
+//    /// \brief Overloaded () operator
+//    virtual fmatvec::Vec3 operator() ( const fmatvec::Vec &q, const double &t, const void * =NULL )
+//    {
+//      fmatvec::Vec3 PrPK;
+//      PrPK ( 0 ) = 0.;
+//      if ( t>t0 )
+//        {
+//          PrPK ( 1 ) = -amp*sin ( om* ( t-t0 ) );
+//        }
+//      return PrPK;
+//    };
+//  };
+
+//  /// \brief Nested class to inform velocity
+//  class Velocity : public MBSim::Function1<fmatvec::Vec3, double>
+//  {
+//  private:
+//    double amp;
+//    double om;
+//    double t0;
+//  public:
+//    /// \brief Constructor with inherited enclosing class
+//    explicit Velocity (const SinusoidalMovement& enc) :
+//      amp(enc.amplitude), om(enc.angularSpeed), t0(enc.timeDelay) {};
+//    
+//    /// \brief Overloaded () operator
+//    fmatvec::Vec3 operator() ( const double& t, const void* )
+//    {
+//      fmatvec::Vec3 j;
+//      j ( 0 ) = 0.;
+//      if ( t>t0 )
+//        {
+//          j ( 1 ) = -amp*cos ( om* ( t-t0 ) ) * om;
+//        }
+//      return j;
+//    }
+//  };
+
+//  /// \brief Nested class to inform acceleration
+//  class Acceleration : public MBSim::Function1<fmatvec::Vec3, double>
+//  {
+//  private:
+//    double amp;
+//    double om;
+//    double t0;
+//  public:
+//    /// \brief Contructor inherited from enclosing class
+//    explicit Acceleration(const SinusoidalMovement& enc) 
+//      : amp(enc.amplitude), om(enc.angularSpeed), t0(enc.timeDelay) {};
+//    
+//    /// \brief Overloaded () operator
+//    fmatvec::Vec3 operator() ( const double& t, const void* )
+//    {
+//      fmatvec::Vec3 dj;
+//      dj ( 0 ) = 0.;
+//      if ( t>t0 )
+//        {
+//          dj ( 1 ) = amp*sin ( om* ( t-t0 ) ) * om * om;
+//        }
+//      return dj;
+//    }
+//  };
 
 private:
   double amplitude;

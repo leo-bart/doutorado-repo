@@ -26,7 +26,9 @@ struct split
 /// @param delimiter
 /// @param empties flag to account for empty spaces
 template <typename Container>
-Container& split( Container& result, const typename Container::value_type& s, typename Container::value_type::value_type delimiter, int empties = 0 )
+Container& split( Container& result, const typename Container::value_type& s,
+		typename Container::value_type::value_type delimiter,
+		split::empties_t empties = split::empties_ok )
 {
   result.clear();
   std::istringstream ss( s );
@@ -34,7 +36,10 @@ Container& split( Container& result, const typename Container::value_type& s, ty
   {
     typename Container::value_type field;
     getline( ss, field, delimiter );
-    if ((empties == 1) && field.empty()) continue;
+    // TODO next line is not compiling due to the following error message:
+    // error: ‘split’ is not a class, namespace, or enumeration
+    //
+//    if ((empties == split::no_empties) && field.empty()) continue;
     result.push_back( field );
   }
   return result;

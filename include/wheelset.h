@@ -9,9 +9,9 @@
 #define WHEELSET_H_
 
 #include <string>
-#include <mbsim/rigid_body.h>
-#include <openmbvcppinterface/rotation.h>
-#include <openmbvcppinterface/compoundrigidbody.h>
+#include <mbsim/objects/rigid_body.h>
+#include "openmbvcppinterface/rotation.h"
+#include "openmbvcppinterface/compoundrigidbody.h"
 
 class Wheelset : public MBSim::RigidBody
 {

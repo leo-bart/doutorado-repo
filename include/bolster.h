@@ -23,13 +23,18 @@
 
 #include <iostream>
 
-#include <mbsim/rigid_body.h>
+#include <mbsim/objects/rigid_body.h>
 #include <mbsim/contours/plane.h>
+#include "mbsim/contours/plate.h"
+#include "mbsim/frames/fixed_relative_frame.h"
+#include "mbsim/frames/floating_relative_frame.h"
+#include "mbsim/frames/contour_frame.h"
+#include "mbsim/utils/rotarymatrices.h"
 #include <fmatvec/fmatvec.h>
 
-#ifdef HAVE_OPENMBVCPPINTERFACE
 #include "openmbvcppinterface/extrusion.h"
-#endif
+
+using namespace MBSim;
 
 class Bolster : public MBSim::RigidBody
 {
@@ -46,7 +51,7 @@ public:
   void setLength(double length_); /// \param length_ bolter length in transversal direction
   void setWagonConnectionPointPosition(fmatvec::Vec pos_); /// \param pos_ Vec 3x3 with position
   void setWagonConnectionPointPosition(double x_, double y_, double z_); /// \param x_ \param y_ \param z_ position coordinates referenced on the center of mass
-  void setGeometryReferenceFramePosition(fmatvec::Vec pos_); /// \param pos_ Vec 3x3 with position referenced on the center of mass
+  void setGeometryReferenceFramePosition(const fmatvec::Vec3 *pos_); /// \param pos_ Vec 3x3 with position referenced on the center of mass
   void setGeometryReferenceFramePosition(double x_, double y_, double z_); /// \param x_ \param y_ \param z_ position coordinates referenced on the center of mass
   /// This method should be called after all body's parameters had already been defined
   /// In case there is any changes in parameters, a new body should be created
@@ -55,9 +60,7 @@ public:
 
   /// OpenMBV interface
   /// \brief enables OpenMBV visualization as an extrusion
-#ifdef HAVE_OPENMBVCPPINTERFACE
   void enableOpenMBV(bool enable);
-#endif
   
  private:
   // private parameters
@@ -70,8 +73,8 @@ public:
   /// Frame for geometry construction.
   /// Initialy it is placed at the center of the bounding box (mid-height, -width, and - length)
   MBSim::FixedRelativeFrame *geometryReferenceFrame;
-  MBSim::Plane *leftWedgePlane;		/// contact plane for the left wedge (-X)
-  MBSim::Plane *rightWedgePlane;	/// contact plane for the right wedge (+X)
+  MBSim::Plate *leftWedgePlane;		/// contact plane for the left wedge (-X)
+  MBSim::Plate *rightWedgePlane;	/// contact plane for the right wedge (+X)
   
   // private methods
   /// \brief Updates the position of the connection point

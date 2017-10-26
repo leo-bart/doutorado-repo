@@ -9,12 +9,14 @@
 #define WAGONSIMPLE_H_
 
 #include "wagongroup.h"
-#include "mbsim/rigid_body.h"
-#include "mbsim/frame.h"
+#include "mbsim/objects/rigid_body.h"
+#include "mbsim/frames/frame.h"
+#include "mbsim/frames/fixed_relative_frame.h"
+#include "mbsim/functions/kinematics/kinematics.h"
 
-#ifdef HAVE_OPENMBVCPPINTERFACE
 #include "openmbvcppinterface/cuboid.h"
-#endif
+
+using namespace MBSim;
 
 class WagonSimple : public WagonGroup
 {
@@ -63,9 +65,7 @@ public:
    * Enables OpenMBV representation
    * @param enable Boolean flag
    */
-#ifdef HAVE_OPENMBVCPPINTERFACE
   void enableOpenMBV(bool enable);
-#endif
 
   double
   getHeight() const

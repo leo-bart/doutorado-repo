@@ -26,22 +26,22 @@
 #endif
 
 #include "mbsim/dynamic_system.h"
-#include "mbsim/rigid_body.h"
-#include "mbsim/spring_damper.h"
+#include "mbsim/objects/rigid_body.h"
+#include "mbsim/links/spring_damper.h"
+#include "mbsim/links/isotropic_rotational_spring_damper.h"
 #include "mbsim/environment.h"
 #include "mbsim/contours/sphere.h"
 #include "mbsim/contours/plane.h"
 #include "mbsim/contours/edge.h"
 #include <mbsim/contours/compound_contour.h>
-#include "mbsim/contact.h"
-#include "mbsim/constitutive_laws.h"
+#include "mbsim/links/contact.h"
+#include "mbsim/constitutive_laws/constitutive_laws.h"
+#include "mbsim/functions/sinusoidal_function.h"
 
-#ifdef HAVE_OPENMBVCPPINTERFACE
 #include "openmbvcppinterface/coilspring.h"
 #include "openmbvcppinterface/cuboid.h"
 #include "openmbvcppinterface/extrusion.h"
 #include "openmbvcppinterface/sphere.h"
-#endif
 
 #include <iostream>
 
@@ -52,8 +52,7 @@ using namespace std;
 #include <string>
 
 #include "mbsim/dynamic_system_solver.h"
-//#include "babertruck.h"
-#include "ridecontroltruck.h"
+#include <barbertruck.h>
 #include "wagonbox.h"
 #include "wagonmovmass.h"
 #include "wagonsimple.h"
@@ -65,7 +64,7 @@ using namespace std;
  * This object is not included in the mbsim 11.0 official distribution,
  * so it was added individually
  */
-#include "isotropic_rotational_spring_damper.h"
+#include <isotropic_rotational_spring_damper.hx>
 
 class System : public MBSim::DynamicSystemSolver
 {
@@ -81,14 +80,14 @@ private:
   SinusoidalMovement *wheel3; // front wheel, rear truck
   SinusoidalMovement *wheel4; // rear wheel, rear truck
   double amplitude;	// movement amplitude [m]
-  double angSpeed;	// movement angular speed [rad/s]
+  double freq;	// movement angular speed [rad/s]
   double t0;	// movement delay to enter [s]
   double truckBaseDistance; // car wheel base [m]
   double truckWheelBase; // truck wheel base [m]
   double wagonMass; // wagon box mass [kg]
   double fillRatio; // amount of fluid in the box for the case of liquid cargo [0-1]
-  double frictionCoefficient; // friction coefficient between friction wedges and mating parts
   fmatvec::SymMat wagonInertiaTensor; // [kg.m^2]
+  bool bolsterBushing; // whether the bolster connections are modelled using 3d-stiffness
   
   /// \brief Get input data from text file
   /// \param inputFileName string containing the name of the input file

@@ -26,10 +26,11 @@
 
 #include "wagonbox.h"
 #include "wagonsimple.h"
-#include <mbsim/spring_damper.h>
-#include <mbsim/joint.h>
-#include <mbsim/constitutive_laws.h>
-#include <mbsim/frame.h>
+#include "mbsim/links/spring_damper.h"
+#include "mbsim/links/joint.h"
+#include "mbsim/constitutive_laws/constitutive_laws.h"
+#include "mbsim/frames/frame.h"
+#include "mbsim/functions/kinetics/linear_spring_damper_force.h"
 #include <math.h> // to use the tanh function
 #include <vector>
 #include <iostream>
