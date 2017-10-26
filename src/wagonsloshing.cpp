@@ -78,11 +78,6 @@ void WagonSloshing::Initialize() {
 	 */
 	std::ostringstream convert;
 
-#ifdef HAVE_OPENMBVCPPINTERFACE
-	std::vector<OpenMBV::CoilSpring*> openMBVCoilContainer;
-	openMBVCoilContainer.resize(n);
-#endif
-
 
 	fmatvec::Vec initialPosition(3,fmatvec::INIT,0.0);
 
@@ -97,13 +92,12 @@ void WagonSloshing::Initialize() {
 		fileo << "m" << i << ": " << massContainer[i]->getMass() << std::endl;
 		massContainer[i]->setFrameOfReference(wagonbox->getFrameC());
 		massContainer[i]->setFrameForKinematics(massContainer[i]->getFrameC());
-		massContainer[i]->setTranslation( new MBSim::LinearTranslation(
-				fmatvec::Mat("[1,0,0;0,1,0;0,0,1]")));
+		massContainer[i]->setTranslation( new MBSim::LinearTranslation<fmatvec::VecV>("[1,0,0;0,1,0;0,0,1]"));
 
 		initialPosition(1) = this->getHeight()*(0.5-(tanh((2*i+1)*M_PI*aspectRatio/2))/
 				((2*i+1)*M_PI*aspectRatio/2));
 		fileo << "z" << i << ": " << initialPosition(1) << std::endl;
-		massContainer[i]->setInitialGeneralizedPosition(initialPosition);
+		massContainer[i]->setGeneralizedInitialPosition(initialPosition);
 
 		convert.str(std::string());
 		convert << "Frame: Sloshing " << i;
@@ -112,9 +106,7 @@ void WagonSloshing::Initialize() {
 		// adds mass to the wagon
 		wagonbox->addFrame(frames[i]);
 		addObject(massContainer[i]);
-#ifdef HAVE_OPENMBVCPPINTERFACE
 		massContainer[i]->getFrame("C")->enableOpenMBV();
-#endif
 
 		// SPRINGS
 		convert.str(std::string());
@@ -125,21 +117,14 @@ void WagonSloshing::Initialize() {
 		springs[i]->setForceFunction(new MBSim::LinearSpringDamperForce(
 				8*9.81*totalFluidMass*pow(tanh((2*i+1)*M_PI*aspectRatio),2) /
 				(pow(2*i+1,2)*pow(M_PI,2)*this->getHeight()*fillRatio)
-				,0.01,0.0001));
+				,0.01));
+		springs[i]->setUnloadedLength(0.001);
 		fileo << "k" << i << ": " << 8*9.81*totalFluidMass*pow(tanh((2*i+1)*M_PI*aspectRatio),2) /
 				(pow(2*i+1,2)*pow(M_PI,2)*this->getHeight()*fillRatio) << std::endl;
 
 		springs[i]->connect(frames[i],massContainer[i]->getFrameC());
 
 		addLink(springs[i]);
-
-#ifdef HAVE_OPENMBVCPPINTERFACE
-		openMBVCoilContainer[i] = new OpenMBV::CoilSpring();
-		openMBVCoilContainer[i]->setCrossSectionRadius ( .005 );
-		openMBVCoilContainer[i]->setNumberOfCoils ( 5 );
-		openMBVCoilContainer[i]->setSpringRadius ( 0.01 );
-		springs[i]->setOpenMBVSpring ( openMBVCoilContainer[i] );
-#endif
 
 
 		/**
@@ -150,7 +135,7 @@ void WagonSloshing::Initialize() {
 		joints[i] = new MBSim::Joint(convert.str());
 		joints[i]->setForceDirection( fmatvec::Mat("[0,0;1,0;0,1]") );
 		joints[i]->setForceLaw( new MBSim::BilateralConstraint() );
-		joints[i]->setImpactForceLaw( new MBSim::BilateralImpact() );
+		//joints[i]->setImpactForceLaw( new MBSim::BilateralImpact() );
 		joints[i]->connect(frames[i],massContainer[i]->getFrameC());
 		addLink(joints[i]);
 
@@ -166,9 +151,8 @@ void WagonSloshing::Initialize() {
 	// degrees of freedom
 	solidMass->setFrameOfReference(wagonbox->getFrame("C"));
 	solidMass->setFrameForKinematics(solidMass->getFrame( "C" ));
-	solidMass->setTranslation( new MBSim::LinearTranslation(
-				fmatvec::Mat ( "[1,0;0,1;0,0]" )));
-	solidMass->setRotation( new MBSim::RotationAboutZAxis() );
+	solidMass->setTranslation( new MBSim::LinearTranslation<fmatvec::VecV>("[1,0;0,1;0,0]"));
+	solidMass->setRotation( new MBSim::RotationAboutZAxis<fmatvec::VecV>() );
 
 	// total mass
 	temp = 0;
@@ -187,7 +171,7 @@ void WagonSloshing::Initialize() {
 	// initial position
 	initialPosition(1) = -(1 / solidMass->getMass()) * temp;
 	fileo << "Z: " << initialPosition(1) << std::endl;
-	solidMass->setInitialGeneralizedPosition(initialPosition);
+	solidMass->setGeneralizedInitialPosition(initialPosition);
 	solidMassConnectionFrame = new MBSim::FixedRelativeFrame("Frame: solid fluid",initialPosition,
 			fmatvec::SqrMat(3,fmatvec::EYE));
 	wagonbox->addFrame(solidMassConnectionFrame);
@@ -213,9 +197,7 @@ void WagonSloshing::Initialize() {
 	/*
 	 * Graphics
 	 */
-#ifdef HAVE_OPENMBVCPPINTERFACE
 	solidMass->getFrame("C")->enableOpenMBV();
-#endif
 
 	/*
 	 * rigid constraint to wagon
@@ -224,11 +206,11 @@ void WagonSloshing::Initialize() {
 
 	rigidJoint->setForceDirection( fmatvec::Mat("[1,0;0,1;0,0]") );
 	rigidJoint->setForceLaw( new MBSim::BilateralConstraint() );
-	rigidJoint->setImpactForceLaw( new MBSim::BilateralImpact() );
+//	rigidJoint->setImpactForceLaw( new MBSim::BilateralImpact() );
 
 	rigidJoint->setMomentDirection( fmatvec::Mat("[0;0;1]") );
 	rigidJoint->setMomentLaw( new MBSim::BilateralConstraint() );
-	rigidJoint->setImpactMomentLaw( new MBSim::BilateralImpact() );
+//	rigidJoint->setImpactMomentLaw( new MBSim::BilateralImpact() );
 
 	rigidJoint->connect(solidMassConnectionFrame,solidMass->getFrameC());
 	addLink(rigidJoint);

@@ -23,13 +23,13 @@
 WagonMovMass::WagonMovMass(const std::string& name, double sFactor_): WagonSimple(name),
 splitFactor(sFactor_)
 {  
-  movingMass = new MBSim::RigidBody("Moving mass");
-  movingMass->setFrameOfReference(wagonbox->getFrameC());
+  movingMass = new RigidBody("Moving mass");
+  movingMass->setFrameOfReference(wagonbox->getFrame("C"));
   movingMass->setFrameForKinematics( movingMass->getFrame("C") );
-  movingMass->setTranslation( new MBSim::LinearTranslation( fmatvec::Mat("[1,0,0;0,1,0;0,0,1]")) );
+  movingMass->setTranslation( new LinearTranslation<fmatvec::VecV> (  ( "[1,0;0,1;0,0]" ) ) );
   fmatvec::Vec initialPosition(3,fmatvec::INIT,0.0);
   initialPosition(0) = 1e-4;
-  movingMass->setInitialGeneralizedPosition(initialPosition);
+  movingMass->setGeneralizedInitialPosition(initialPosition);
   addObject(movingMass);
 #ifdef HAVE_OPENMBVCPPINTERFACE
   movingMass->getFrame("C")->enableOpenMBV();
@@ -41,16 +41,17 @@ splitFactor(sFactor_)
   spring = new MBSim::SpringDamper("Moving mass spring");
   // added small initial deformation to correct initialization error:
   // the initial direction of the force could not be calculated
-  spring->setForceFunction(new MBSim::LinearSpringDamperForce(10e3,0.01,0.00001));
-  spring->connect(wagonbox->getFrameC(),movingMass->getFrameC());
+  spring->connect(wagonbox->getFrame("C"),movingMass->getFrame("C"));
+  spring->setForceFunction(new MBSim::LinearSpringDamperForce(10e3,0.01));
+  spring->setUnloadedLength(0.00001);
   addLink(spring);
-#ifdef HAVE_OPENMBVCPPINTERFACE
-  OpenMBV::CoilSpring *openMBVSpringM = new OpenMBV::CoilSpring();
-  openMBVSpringM->setCrossSectionRadius ( .005 );
-  openMBVSpringM->setNumberOfCoils ( 5 );
-  openMBVSpringM->setSpringRadius ( 0.01 );
-  spring->setOpenMBVSpring ( openMBVSpringM );
-#endif
+//#ifdef HAVE_OPENMBVCPPINTERFACE
+//  OpenMBV::CoilSpring *openMBVSpringM = new OpenMBV::CoilSpring();
+//  openMBVSpringM->setCrossSectionRadius ( .005 );
+//  openMBVSpringM->setNumberOfCoils ( 5 );
+//  openMBVSpringM->setSpringRadius ( 0.01 );
+//  spring->setOpenMBVSpring ( openMBVSpringM );
+//#endif
 
   /**
    * Definition of the translational joint with wagon's body
@@ -58,8 +59,7 @@ splitFactor(sFactor_)
   translational = new MBSim::Joint("Joint: Wagon to moving mass");
   translational->setForceDirection( fmatvec::Mat("[0;1;0]") );
   translational->setForceLaw( new MBSim::BilateralConstraint() );
-  translational->setImpactForceLaw( new MBSim::BilateralImpact() );
-  translational->connect(wagonbox->getFrameC(),movingMass->getFrameC());
+  translational->connect(wagonbox->getFrame("C"),movingMass->getFrame("C"));
   addLink(translational);
 }
 

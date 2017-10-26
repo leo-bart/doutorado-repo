@@ -82,22 +82,16 @@ WagonSimple::setRearBolsterConnectionPosition(double x_, double y_, double z_)
 void
 WagonSimple::setRearBolsterConnectionPosition(fmatvec::Vec3 pos_)
 {
-  rearBolsterConnection->setRelativePosition(pos_);
+	rearBolsterConnection->setRelativePosition(pos_);
 }
 
-#ifdef HAVE_OPENMBVCPPINTERFACE
 void WagonSimple::enableOpenMBV(bool enable)
-  {
-    if(enable)
-      {
-        OpenMBV::Cuboid* wagonBoxOpenMBV = new OpenMBV::Cuboid;
-        fmatvec::Vec dimensions(3);
-        dimensions(0) = this->length;
-        dimensions(1) = this->height;
-        dimensions(2) = this->width;
-        wagonBoxOpenMBV->setStaticColor(OpenMBV::ScalarParameter("yellow",0.7));
-        wagonBoxOpenMBV->setLength(dimensions);
-        wagonbox->setOpenMBVRigidBody(wagonBoxOpenMBV);
-      };
-  }
-#endif
+{
+	if(enable){
+		std::shared_ptr<OpenMBV::Cuboid> wagonboxMBV=
+				OpenMBV::ObjectFactory::create<OpenMBV::Cuboid>();
+		wagonboxMBV->setDynamicColor(4);
+		wagonboxMBV->setLength(length,height,width);
+		wagonbox->setOpenMBVRigidBody(wagonboxMBV);
+	};
+}

@@ -80,18 +80,13 @@ void WagonBox::setRearBolsterConnectionPosition(double x_, double y_, double z_)
   setRearBolsterConnectionPosition(r_);
 }
 
-#ifdef HAVE_OPENMBVCPPINTERFACE
 void WagonBox::enableOpenMBV(bool enable)
 {
   if(enable){
-    OpenMBV::Cuboid* wagonbox = new OpenMBV::Cuboid;
-    fmatvec::Vec dimensions(3);
-    dimensions(0) = this->length;
-    dimensions(1) = this->height;
-    dimensions(2) = this->width;
-    wagonbox->setStaticColor(OpenMBV::ScalarParameter("color4",1));
-    wagonbox->setLength(dimensions);
+	std::shared_ptr<OpenMBV::Cuboid> wagonbox =
+			  OpenMBV::ObjectFactory::create<OpenMBV::Cuboid>();
+    wagonbox->setDynamicColor(4);
+    wagonbox->setLength(length,height,width);
     this->setOpenMBVRigidBody(wagonbox);
   };
 }
-#endif

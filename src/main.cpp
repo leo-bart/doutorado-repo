@@ -29,37 +29,46 @@ using namespace MBSim;
 int main(int argc, char** argv)
 {
  // read input file
- string line;
- string inputFileName = "input.in";
+ vector<string> inputFileNames;
+ if (argc >= 2){
+	 for (int i=1; i<argc; i++) inputFileNames.push_back(argv[i]);
+ }
+ else inputFileNames.push_back("input.in");
   
   // settings
- double endTime = atof(searchParameter(inputFileName,"SIMULATION_TIME").c_str());
+ double endTime = atof(searchParameter(inputFileNames[0],"SIMULATION_TIME").c_str());
 
  // build single modules
- DynamicSystemSolver *sys = new System(searchParameter(inputFileName,"SYSTEM_NAME"),
-     inputFileName);
+ DynamicSystemSolver *sys1 = new System(searchParameter(inputFileNames[0],"SYSTEM_NAME"),inputFileNames[0]);
  
- // add modules to overall dynamical system
- sys->setConstraintSolver(GaussSeidel);
- sys->setImpactSolver(GaussSeidel);
- sys->setFlushEvery(100);
- sys->initialize();
- sys->setStopIfNoConvergence(true,true);
- sys->setMaxIter(1e6);
- sys->setgTol(1e-6);
- sys->setgdTol(2e-3);
- sys->setLaTol(2e-2);
- sys->setgddTol(2e-5);
- 
- // TimeSteppingSSCIntegrator integrator;
- TimeSteppingIntegrator integrator;
- integrator.setStepSize(0.5e-5);
- //integrator.setAbsoluteTolerance(1e-8);
- //integrator.setRelativeTolerance(1e-5);
+ // add modules to overall dynamic system
+ sys1->setConstraintSolver(DynamicSystemSolver::GaussSeidel);
+ sys1->setImpactSolver(DynamicSystemSolver::GaussSeidel);
+ sys1->setFlushEvery(100);
+ sys1->initialize();
+ sys1->setStopIfNoConvergence(false,true);
+ sys1->setMaxIter(1500);
+ sys1->setGeneralizedImpulseTolerance(1e-4);
+ sys1->setGeneralizedForceTolerance(1e-4);
+ sys1->setGeneralizedRelativePositionTolerance(5e-5);
+ sys1->setGeneralizedRelativeVelocityTolerance(5e-6);
+ //sys->setgTol(1e-6);
+ //sys->setgdTol(2e-3);
+ //sys->setLaTol(2e-2);
+ //sys->setgddTol(2e-5);
+
+ MBSimIntegrator::TimeSteppingSSCIntegrator integrator;
+// integrator.setStepSize(1e-6);
+ integrator.setRelativeTolerance(1e-7);
+ integrator.setAbsoluteTolerance(1e-9);
+ integrator.setInitialStepSize(1e-8);
  integrator.setEndTime(endTime);
- integrator.setPlotStepSize(1e-3);
- //integrator.setGapControl(1);
- integrator.integrate(*sys);
+ integrator.setPlotStepSize(endTime/500);
+ integrator.setStepSizeMax(0.5e-6);
+ integrator.setStepSizeMin(1e-9);
+// integrator.setGapControl(1);
+ DynamicSystemSolver none("none");
+ integrator.integrate(*sys1);
  cout << "finished" << endl;
  
  return 0;
